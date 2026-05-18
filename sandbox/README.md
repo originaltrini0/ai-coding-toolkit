@@ -28,22 +28,17 @@ A Model Context Protocol server for facilitating integration with Plaid. This se
 
 1. Sign in to your [Plaid Developer Dashboard](https://developer.plaid.com) account
 2. Navigate to **Developers** → **[Keys](https://dashboard.plaid.com/developers/keys)**
-3. Locate your **sandbox credentials** as illustrated in the screenshot below.
+3. Locate your **sandbox credentials**.
 
->[!Important]
-All `PLAID_CLIENT_ID` and `PLAID_SECRET` references in the following MCP configuration use **sandbox credentials**.
+> [!IMPORTANT]
+> All `PLAID_CLIENT_ID` and `PLAID_SECRET` references in the following MCP configuration use **sandbox credentials**.
 
+> [!NOTE]
+> All snippets below use `uvx`. If you installed via pip, swap `uvx mcp-server-plaid` for `python -m mcp_server_plaid`.
 
-<img width="890" alt="image" src="https://github.com/user-attachments/assets/d0c0030a-93c9-4d3f-bb21-1f12b5c1e8e9" />
+### Usage with Claude Code
 
-
-
-### Usage with Claude Desktop
-
-Add this to your `claude_desktop_config.json`:
-
-<details>
-<summary>Using uvx</summary>
+Add this to `.mcp.json` in your project root (or `~/.claude.json` for a user-scoped install):
 
 ```json
 {
@@ -61,38 +56,20 @@ Add this to your `claude_desktop_config.json`:
   }
 }
 ```
-</details>
 
-<details>
-<summary>Using pip installation</summary>
+Or use the CLI:
 
-```json
-{
-  "mcpServers": {
-    "plaid": {
-      "command": "python",
-      "args": [
-        "-m",
-        "mcp_server_plaid",
-        "--client-id",
-        "YOUR_PLAID_CLIENT_ID",
-        "--secret",
-        "YOUR_PLAID_SECRET"
-      ]
-    }
-  }
-}
+```bash
+claude mcp add plaid -- uvx mcp-server-plaid --client-id YOUR_PLAID_CLIENT_ID --secret YOUR_PLAID_SECRET
 ```
-</details>
 
 ### Usage with Cursor
-For quick installation, use the one-click installation button 
+
+For quick installation, use the one-click installation button.
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=plaid&config=eyJjb21tYW5kIjoidXZ4IG1jcC1zZXJ2ZXItcGxhaWQiLCJlbnYiOnsiUExBSURfQ0xJRU5UX0lEIjoiQUREX1lPVVJfQ0xJRU5UX0lEIiwiUExBSURfU0VDUkVUIjoiQUREX1lPVVJfQVBJX1NFQ1JFVCJ9fQ%3D%3D)
 
-For manual installation, add the following JSON block to Cursor MCP config file,
-<details>
-<summary>Using uvx</summary>
+For manual installation, add the following JSON block to Cursor MCP config file.
 
 ```json
 {
@@ -110,33 +87,20 @@ For manual installation, add the following JSON block to Cursor MCP config file,
   }
 }
 ```
-</details>
 
-<details>
-<summary>Using pip installation</summary>
+### Usage with Codex
 
-```json
-{
-  "mcpServers": {
-    "plaid": {
-      "command": "python",
-      "args": [
-        "-m",
-        "mcp_server_plaid",
-        "--client-id",
-        "YOUR_PLAID_CLIENT_ID",
-        "--secret",
-        "YOUR_PLAID_SECRET"
-      ]
-    }
-  }
-}
+Add this to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.plaid]
+command = "uvx"
+args = ["mcp-server-plaid", "--client-id", "YOUR_PLAID_CLIENT_ID", "--secret", "YOUR_PLAID_SECRET"]
 ```
-</details>
 
 ### Usage with VS Code
 
-For quick installation, use one of the one-click installation buttons below,
+For quick installation, use one of the one-click installation buttons below.
 
 [![Install with UV in VS Code](https://img.shields.io/badge/VS_Code-UV-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=plaid&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22client_id%22%2C%22description%22%3A%22Plaid%20Client%20ID%22%2C%22password%22%3Afalse%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22secret%22%2C%22description%22%3A%22Plaid%20Secret%22%2C%22password%22%3Atrue%7D%5D&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-plaid%22%5D%2C%22env%22%3A%7B%22PLAID_CLIENT_ID%22%3A%22%24%7Binput%3Aclient_id%7D%22%2C%22PLAID_SECRET%22%3A%22%24%7Binput%3Asecret%7D%22%7D%7D) [![Install with UV in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-UV-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=plaid&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22client_id%22%2C%22description%22%3A%22Plaid%20Client%20ID%22%2C%22password%22%3Afalse%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22secret%22%2C%22description%22%3A%22Plaid%20Secret%22%2C%22password%22%3Atrue%7D%5D&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-plaid%22%5D%2C%22env%22%3A%7B%22PLAID_CLIENT_ID%22%3A%22%24%7Binput%3Aclient_id%7D%22%2C%22PLAID_SECRET%22%3A%22%24%7Binput%3Asecret%7D%22%7D%7D&quality=insiders)
 
@@ -145,9 +109,6 @@ For manual installation, add the following JSON block to your User Settings (JSO
 Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
 
 > Note that the `mcp` key is needed when using the `mcp.json` file.
-
-<details>
-<summary>Using uvx</summary>
 
 ```json
 {
@@ -179,14 +140,31 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
   }
 }
 ```
-</details>
 
-### Usage with [Zed](https://github.com/zed-industries/zed)
+### Usage with Claude Desktop
 
-Add to your Zed settings.json:
+Add this to your `claude_desktop_config.json`:
 
-<details>
-<summary>Using uvx</summary>
+```json
+{
+  "mcpServers": {
+    "plaid": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-plaid",
+        "--client-id",
+        "YOUR_PLAID_CLIENT_ID",
+        "--secret",
+        "YOUR_PLAID_SECRET"
+      ]
+    }
+  }
+}
+```
+
+### Usage with Zed
+
+Add to your Zed `settings.json`:
 
 ```json
 {
@@ -206,29 +184,6 @@ Add to your Zed settings.json:
    }
 }
 ```
-</details>
-
-<details>
-<summary>Using pip installation</summary>
-
-```json
-{
-  "context_servers": {
-    "mcp-server-plaid": {
-      "command": "python",
-      "args": [
-        "-m",
-        "mcp_server_plaid",
-        "--client-id",
-        "YOUR_PLAID_CLIENT_ID",
-        "--secret",
-        "YOUR_PLAID_SECRET"
-      ]
-    }
-  }
-}
-```
-</details>
 
 ## Debugging
 
