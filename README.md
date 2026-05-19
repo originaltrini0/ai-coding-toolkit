@@ -24,7 +24,7 @@ The sandbox MCP server in `/sandbox` provides tools to test Plaid integrations w
 - **Obtain sandbox access tokens** for testing
 - **Simulate webhooks** to test application handling
 
-See [sandbox/README.md](sandbox/README.md) for setup instructions across Claude Code, Cursor, Codex, VS Code, Claude Desktop, and Zed.
+See [sandbox/README.md](sandbox/README.md) for setup instructions.
 
 ## Rules for AI Integration
 
