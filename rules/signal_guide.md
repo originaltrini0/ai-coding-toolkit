@@ -18,9 +18,9 @@ This guide is designed to be used for the purpose of building a sample Plaid int
 
 Before starting the integration, ensure the following:
 
-- You have a [Plaid Developer Dashboard](https:/dashboard.plaid.com) account.
+- You have a [Plaid Developer Dashboard](https://dashboard.plaid.com) account.
 - You have obtained your **client ID** and **Sandbox secret** from the dashboard.
-- You are working in the [Sandbox environment](https:/plaid.com/docs/sandbox/overview) where test credentials and institutions are available.
+- You are working in the [Sandbox environment](https://plaid.com/docs/sandbox/overview) where test credentials and institutions are available.
 - Your development environment can serve both **frontend** and **backend** logic. The backend must be able to securely manage sensitive credentials and handle API calls.
 - You have applied for and received approval for Signal Transaction Scores (or have received Sandbox access while waiting for approval).
 
@@ -30,7 +30,7 @@ Before beginning your integration, first create a ruleset in the Plaid Dashboard
 
 ### 1.1 Access Signal Rules Dashboard
 
-- Navigate to the [Signal Rules Dashboard](https:/dashboard.plaid.com/signal/risk-profiles) page.
+- Navigate to the [Signal Rules Dashboard](https://dashboard.plaid.com/signal/risk-profiles) page.
 - Toggle Sandbox mode in the top right corner.
 
 ### 1.2 Create a Ruleset
@@ -41,7 +41,7 @@ Before beginning your integration, first create a ruleset in the Plaid Dashboard
 
 ## Step 2: Backend - Create a Link Token
 
-The Link Token is a short-lived token created server-side that configures the [Plaid Link](https:/plaid.com/docs/link) flow. This token must be generated on your backend and passed to the frontend.
+The Link Token is a short-lived token created server-side that configures the [Plaid Link](https://plaid.com/docs/link) flow. This token must be generated on your backend and passed to the frontend.
 
 ### 2.1 API Endpoint
 
