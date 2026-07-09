@@ -26,7 +26,7 @@ Follow the appropriate respective guide.
 
 - You have a [Plaid Developer Dashboard](https://dashboard.plaid.com) account.
 - You have obtained your **client ID** and **Sandbox secret** from the dashboard.
-- You are working in the [Sandbox environment](https://plaid.com/docs/sandbox/overview) where test credentials and institutions are available.
+- You are working in the [Sandbox environment](https://plaid.com/docs/sandbox/) where test credentials and institutions are available.
 - Your development environment can serve both **frontend** and **backend** logic. The backend must be able to securely manage sensitive credentials and handle API calls.
 
 ## Step 1: Backend - Create a Link Token

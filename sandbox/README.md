@@ -26,7 +26,7 @@ A Model Context Protocol server for facilitating integration with Plaid. This se
 
 ### Obtaining API Credentials
 
-1. Sign in to your [Plaid Developer Dashboard](https://developer.plaid.com) account
+1. Sign in to your [Plaid Developer Dashboard](https://dashboard.plaid.com) account
 2. Navigate to **Developers** → **[Keys](https://dashboard.plaid.com/developers/keys)**
 3. Locate your **sandbox credentials**.
 
