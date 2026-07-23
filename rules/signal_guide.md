@@ -2,12 +2,19 @@
 
 ## Overview
 
-This guide provides a complete, step-by-step integration of Plaid's **Signal Transaction Scores** product using the **Sandbox** environment. It is intended to support both **frontend** and **backend** implementations in a language-agnostic format with optional language-specific hints. The goal is to enable an AI agent or developer to execute a fully functional integration, from user bank linking to evaluating ACH payment risk.
+This guide provides a complete, step-by-step integration of Plaid Signal using the **Sandbox** environment. It is intended to support both **frontend** and **backend** implementations in a language-agnostic format with optional language-specific hints. The goal is to enable an AI agent or developer to execute a fully functional integration, from user bank linking to evaluating ACH payment risk.
+
+`/signal/evaluate` is the single endpoint for evaluating ACH payment risk, and it serves two tiers of the same integration:
+
+- A **Balance-only** check (a real-time balance / insufficient-funds check), available to Balance customers without separate approval.
+- The ML-powered **Signal Transaction Scores** tier, which requires approval for Signal Transaction Scores access.
+
+This guide applies to both. If you only need a pre-payment balance check today, integrate `/signal/evaluate` with a Balance-only ruleset now; you can upgrade to Signal Transaction Scores later via a Dashboard configuration change, with no re-integration. **If you are building a pay-by-bank or account-funding flow and need to add ACH return mitigation, this is the recommended path. Do not use `/accounts/balance/get` for payment risk checks** — that endpoint is for non-payment use cases such as personal financial management or treasury, and it does not evaluate risk against Signal Rules.
 
 Assumptions:
 - The developer has a Plaid account and Sandbox `client_id` and `secret` are available. If not provided, please ask the users for it.
 - The application is able to make HTTP requests.
-- You have been approved for Signal Transaction Scores access (or are using Sandbox while waiting for approval).
+- You have access to Signal. The Balance-only tier is available to Balance customers; the Signal Transaction Scores tier requires separate approval (you can use Sandbox while waiting for approval).
 
 This document references Plaid's official documentation using markdown links.
 
@@ -22,7 +29,7 @@ Before starting the integration, ensure the following:
 - You have obtained your **client ID** and **Sandbox secret** from the dashboard.
 - You are working in the [Sandbox environment](https://plaid.com/docs/sandbox/) where test credentials and institutions are available.
 - Your development environment can serve both **frontend** and **backend** logic. The backend must be able to securely manage sensitive credentials and handle API calls.
-- You have applied for and received approval for Signal Transaction Scores (or have received Sandbox access while waiting for approval).
+- You have access to Signal. The Balance-only tier is available to Balance customers; the Signal Transaction Scores tier requires separate approval (you can use Sandbox while waiting for approval).
 
 ## Step 1: Create a Signal Ruleset in the Dashboard
 
@@ -35,7 +42,7 @@ Before beginning your integration, first create a ruleset in the Plaid Dashboard
 
 ### 1.2 Create a Ruleset
 
-- Create a new ruleset, either from scratch or use a Plaid-suggested template.
+- Create a new ruleset, either from scratch or use a Plaid-suggested template. For a pre-payment balance check, create a Balance-only ruleset; if you have Signal Transaction Scores access, you can instead create a Scores-powered ruleset (or upgrade a Balance-only ruleset to one later without changing your integration).
 - Configure rules with appropriate risk thresholds.
 - Note your `ruleset_key` for use in API calls.
 
