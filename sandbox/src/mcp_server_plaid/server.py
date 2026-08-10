@@ -29,7 +29,7 @@ logging.basicConfig(
 logger = logging.getLogger("plaid-mcp-server")
 
 # Constants
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 REQUEST_TIMEOUT = 30.0
 
 
