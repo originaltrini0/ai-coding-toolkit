@@ -8,6 +8,7 @@ It allows AI assistants to interact with Plaid's financial data APIs through the
 import asyncio
 import logging
 import sys
+from importlib.metadata import PackageNotFoundError, version
 from typing import Any, Dict, List
 
 import click
@@ -28,8 +29,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger("plaid-mcp-server")
 
+# Read the version from distribution metadata rather than a literal: the publish
+# workflow stamps a generated version into pyproject.toml, which a literal here
+# would not track.
+try:
+    __version__ = version("mcp-server-plaid")
+except PackageNotFoundError:
+    logger.warning(
+        "No mcp-server-plaid distribution metadata found; reporting version as unknown"
+    )
+    __version__ = "0.0.0+unknown"
+
 # Constants
-__version__ = "0.1.0"
 REQUEST_TIMEOUT = 30.0
 
 
