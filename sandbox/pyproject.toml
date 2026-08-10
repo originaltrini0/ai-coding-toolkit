@@ -14,7 +14,7 @@ authors = [
 ]
 dependencies = [
     "httpx",
-    "mcp",
+    "mcp>=1.0.0",
     "websockets",
     "plaid-python"
 ]
