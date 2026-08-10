@@ -29,14 +29,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger("plaid-mcp-server")
 
-# Constants
+# Read the version from distribution metadata rather than a literal: the publish
+# workflow stamps a generated version into pyproject.toml, which a literal here
+# would not track.
 try:
-    # Read from installed distribution metadata so dev releases, which stamp a
-    # generated version into pyproject.toml at publish time, report accurately.
     __version__ = version("mcp-server-plaid")
 except PackageNotFoundError:
+    logger.warning(
+        "No mcp-server-plaid distribution metadata found; reporting version as unknown"
+    )
     __version__ = "0.0.0+unknown"
 
+# Constants
 REQUEST_TIMEOUT = 30.0
 
 
